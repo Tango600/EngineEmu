@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineEmu", "EngineEmu\EngineEmu.csproj", "{39EEB2F0-CEDE-4921-BEC2-2824E01D1128}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39EEB2F0-CEDE-4921-BEC2-2824E01D1128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39EEB2F0-CEDE-4921-BEC2-2824E01D1128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39EEB2F0-CEDE-4921-BEC2-2824E01D1128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39EEB2F0-CEDE-4921-BEC2-2824E01D1128}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8FA04485-E700-4043-9853-C95FCA798F0E}
+	EndGlobalSection
+EndGlobal
