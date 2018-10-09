@@ -17,6 +17,7 @@ namespace EngineEmu
 
         private long ticks = 0;
         private int ticksByRottation = 100;
+        private int lastIgnitionDegree = -1;
         private int tack = 0;
         private Graphics graphics;
         private bool monitorInit = false;
@@ -179,8 +180,6 @@ namespace EngineEmu
             }
             cycle++;
         }
-
-        int lastIgnitionDegree = -1;
 
         const int ignitionGap = 3000;
 
@@ -381,11 +380,10 @@ namespace EngineEmu
             if (saveFileTimings.ShowDialog() == DialogResult.OK)
             {
                 var timings = new List<string>();
-                timings.Add("// " + string.Join(", ", tableRPMPoints.Select(f => Convert.ToInt32(1000000M / (f / 60M)))));
-                timings.Add("int[] tableRPMPoints = { " + string.Join(", ", tableRPMPoints) + " };");
-
-                timings.Add("// " + string.Join(", ", tableIgnDelays));
-                timings.Add("int[] tableIgnDelays = { " + string.Join(", ", tableIgnDelays) + " };");
+                timings.Add("byte tablesLength = " + tableRPMPoints.Length);
+                timings.Add("// RPM:                " + string.Join(", ", tableRPMPoints.Select(f => Convert.ToInt32(1000000M / (f / 60M)))));
+                timings.Add("int tableRPMPoints[] = { " + string.Join(", ", tableRPMPoints) + " };");
+                timings.Add("int tableIgnDelays[] = { " + string.Join(", ", tableIgnDelays) + " };");
 
                 File.WriteAllLines(saveFileTimings.FileName, timings.ToArray());
             }
