@@ -15,7 +15,7 @@ namespace EngineEmu
         private bool changed;
         private string lastTableName = "";
 
-        private long ticks = 0;
+        private ulong ticks = 0;
         private int ticksByRottation = 100;
         private int lastIgnitionDegree = -1;
         private int tack = 0;
@@ -158,7 +158,7 @@ namespace EngineEmu
                     tack = 0;
                 }
                 decimal kvant = (1000000M / (speRPM.Value / 60M)) / ticksByRottation;
-                ticks += (long)kvant;
+                ticks += (ulong)kvant;
 
                 if (tableRPMPoints.Length > 0 && tableIgnDelays.Length > 0)
                     loop();
@@ -185,21 +185,21 @@ namespace EngineEmu
 
         byte sensor = 0;
         int ignitionDelay = 0;
-        long lastTime = 0;
-        long deltaTime = 100000;
-        long stopTime = 0;
-        long lastStopTime = 0;
-        long startTime = 0;
+        ulong lastTime = 0;
+        ulong deltaTime = 100000;
+        ulong stopTime = 0;
+        ulong lastStopTime = 0;
+        ulong startTime = 0;
 
         private void loop()
         {
             if (sensor == 1)
             {
-                if (deltaTime > 0)
+                if (deltaTime > 0 && deltaTime < 200000)
                 {
                     sensor = 0;
                     int i = 0;
-                    while (i < tableRPMPoints.Length && tableRPMPoints[i] > deltaTime)
+                    while (i < tableRPMPoints.Length && (ulong)tableRPMPoints[i] > deltaTime)
                     {
                         i++;
                     }
@@ -217,7 +217,7 @@ namespace EngineEmu
                     ignitionDelay = Convert.ToInt32((tableIgnDelays[i] / 360M) * deltaTime);
                     lastIgnitionDegree = Convert.ToInt32(360M / ((decimal)deltaTime / ignitionDelay));
 
-                    startTime = lastTime + ignitionDelay;
+                    startTime = lastTime + (ulong)ignitionDelay;
                     lastStopTime = stopTime;
                     stopTime = startTime + ignitionGap;
                 }
@@ -266,7 +266,7 @@ namespace EngineEmu
             }
         }
 
-        private long micros()
+        private ulong micros()
         {
             return ticks;
         }
@@ -530,6 +530,18 @@ namespace EngineEmu
             int rpm = Convert.ToInt32(row.Cells[0].Value);
             int degree = Convert.ToInt32(360M * (speFlashDuration.Value / (1000000M / (rpm / 60M))));
             row.Cells[1].Value = degree;
+        }
+
+        private void btOverfollow_Click(object sender, EventArgs e)
+        {
+            ulong dlt = ticks + ulong.MaxValue - 1000;
+            ticks = ulong.MaxValue - 1000;
+
+            lastTime += dlt;
+            deltaTime = micros() - lastTime;
+            startTime = lastTime + (ulong)ignitionDelay;
+            stopTime = startTime + ignitionGap;
+            lastStopTime = stopTime;
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Drawing
             g.DrawEllipse(blackPen, figureX, figureY, circleRadius * 2, circleRadius * 2);
         }
 
-        public static int DrawIgnitFlashSector(Graphics g, int startAngle, long deltaTime, int flasDuration, FigureType figureType)
+        public static int DrawIgnitFlashSector(Graphics g, int startAngle, ulong deltaTime, int flasDuration, FigureType figureType)
         {
             int sweepAngle = 0;
             int r = circleRadius * 2;
@@ -102,7 +102,7 @@ namespace Drawing
             }
         }
 
-        public static void DrawIgnitionMoment(Graphics g, int degree, long deltaTime, int ignitionGap, FigureType figureType)
+        public static void DrawIgnitionMoment(Graphics g, int degree, ulong deltaTime, int ignitionGap, FigureType figureType)
         {
             DrawStroke(g, Math.Abs(degree), Color.BlueViolet, 6, 15, 0, figureType);
 

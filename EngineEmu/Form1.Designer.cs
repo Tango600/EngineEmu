@@ -60,6 +60,8 @@
             this.toolStripMenuConvert = new System.Windows.Forms.ToolStripMenuItem();
             this.plusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuCalcOptimal = new System.Windows.Forms.ToolStripMenuItem();
             this.btApply = new System.Windows.Forms.Button();
             this.openFileSettings = new System.Windows.Forms.OpenFileDialog();
             this.saveFileSettings = new System.Windows.Forms.SaveFileDialog();
@@ -71,8 +73,7 @@
             this.btRedraw = new System.Windows.Forms.Button();
             this.speFlashDuration = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuCalcOptimal = new System.Windows.Forms.ToolStripMenuItem();
+            this.btOverfollow = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.speSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.speTicksByRotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.speRPM)).BeginInit();
@@ -404,6 +405,18 @@
             this.toolStripMenuItem2.Text = "360";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(196, 6);
+            // 
+            // toolStripMenuCalcOptimal
+            // 
+            this.toolStripMenuCalcOptimal.Name = "toolStripMenuCalcOptimal";
+            this.toolStripMenuCalcOptimal.Size = new System.Drawing.Size(199, 22);
+            this.toolStripMenuCalcOptimal.Text = "Calc optimal degree";
+            this.toolStripMenuCalcOptimal.Click += new System.EventHandler(this.toolStripMenuCalcOptimal_Click);
+            // 
             // btApply
             // 
             this.btApply.Image = ((System.Drawing.Image)(resources.GetObject("btApply.Image")));
@@ -521,23 +534,22 @@
             this.label4.TabIndex = 24;
             this.label4.Text = "Flash duration (mcs.)";
             // 
-            // toolStripSeparator3
+            // btOverfollow
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(196, 6);
-            // 
-            // toolStripMenuCalcOptimal
-            // 
-            this.toolStripMenuCalcOptimal.Name = "toolStripMenuCalcOptimal";
-            this.toolStripMenuCalcOptimal.Size = new System.Drawing.Size(199, 22);
-            this.toolStripMenuCalcOptimal.Text = "Calc optimal degree";
-            this.toolStripMenuCalcOptimal.Click += new System.EventHandler(this.toolStripMenuCalcOptimal_Click);
+            this.btOverfollow.Location = new System.Drawing.Point(76, 190);
+            this.btOverfollow.Name = "btOverfollow";
+            this.btOverfollow.Size = new System.Drawing.Size(75, 23);
+            this.btOverfollow.TabIndex = 25;
+            this.btOverfollow.Text = "Overfollow";
+            this.btOverfollow.UseVisualStyleBackColor = true;
+            this.btOverfollow.Click += new System.EventHandler(this.btOverfollow_Click);
             // 
             // Engine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 246);
+            this.Controls.Add(this.btOverfollow);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.speFlashDuration);
             this.Controls.Add(this.btRedraw);
@@ -624,6 +636,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCalcOptimal;
+        private System.Windows.Forms.Button btOverfollow;
     }
 }
 
