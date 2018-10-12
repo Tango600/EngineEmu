@@ -38,7 +38,7 @@ namespace EngineEmu
             var ignDelays = new List<int>();
             for (int i = 0; i < dgIgnitionMoments.RowCount; i++)
             {
-                if (dgIgnitionMoments[0, i]?.Value != null && dgIgnitionMoments[0, i].Value.ToString() != "")
+                if (dgIgnitionMoments[0, i]?.Value != null && dgIgnitionMoments[0, i].Value.ToString() != "" && dgIgnitionMoments[1, i].Value.ToString() != "")
                 {
                     decimal rpm = Convert.ToDecimal(dgIgnitionMoments[0, i].Value);
                     decimal rt = (1000000M / (rpm / 60M));
@@ -364,14 +364,7 @@ namespace EngineEmu
         {
             if (dgIgnitionMoments.CurrentRow.Index != -1)
             {
-                dgIgnitionMoments.RowCount++;
-                for (int i = dgIgnitionMoments.RowCount - 1; i > dgIgnitionMoments.CurrentRow.Index; i--)
-                {
-                    dgIgnitionMoments[0, i].Value = dgIgnitionMoments[0, i - 1].Value;
-                    dgIgnitionMoments[1, i].Value = dgIgnitionMoments[1, i - 1].Value;
-                }
-                dgIgnitionMoments[0, dgIgnitionMoments.CurrentRow.Index].Value = "";
-                dgIgnitionMoments[1, dgIgnitionMoments.CurrentRow.Index].Value = "";
+                dgIgnitionMoments.Rows.Insert(dgIgnitionMoments.CurrentRow.Index, "", "");
 
                 changed = true;
                 initParametrs(chRoundNotation.Checked);
