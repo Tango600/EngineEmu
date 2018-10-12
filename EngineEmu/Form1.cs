@@ -372,6 +372,9 @@ namespace EngineEmu
                 }
                 dgIgnitionMoments[0, dgIgnitionMoments.CurrentRow.Index].Value = "";
                 dgIgnitionMoments[1, dgIgnitionMoments.CurrentRow.Index].Value = "";
+
+                changed = true;
+                initParametrs(chRoundNotation.Checked);
             }
         }
 
@@ -529,7 +532,7 @@ namespace EngineEmu
             var row = dgIgnitionMoments.CurrentRow;
             int rpm = Convert.ToInt32(row.Cells[0].Value);
             int degree = Convert.ToInt32(360M * (speFlashDuration.Value / (1000000M / (rpm / 60M))));
-            row.Cells[1].Value = degree;
+            row.Cells[1].Value = degree - 5;
         }
 
         private void btOverfollow_Click(object sender, EventArgs e)
@@ -542,6 +545,15 @@ namespace EngineEmu
             startTime = lastTime + (ulong)ignitionDelay;
             stopTime = startTime + ignitionGap;
             lastStopTime = stopTime;
+        }
+
+        private void toolStripMenuRemove_Click(object sender, EventArgs e)
+        {
+            var row = dgIgnitionMoments.CurrentRow;
+            dgIgnitionMoments.Rows.Remove(row);
+
+            changed = true;
+            initParametrs(chRoundNotation.Checked);
         }
     }
 }

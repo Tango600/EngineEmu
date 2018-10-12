@@ -336,13 +336,14 @@
             this.toolStripSeparator3,
             this.toolStripMenuCalcOptimal});
             this.contextMenuGrid.Name = "contextMenuGrid";
-            this.contextMenuGrid.Size = new System.Drawing.Size(200, 176);
+            this.contextMenuGrid.Size = new System.Drawing.Size(200, 198);
             // 
             // toolStripMenuRemove
             // 
             this.toolStripMenuRemove.Name = "toolStripMenuRemove";
             this.toolStripMenuRemove.Size = new System.Drawing.Size(199, 22);
             this.toolStripMenuRemove.Text = "Remove";
+            this.toolStripMenuRemove.Click += new System.EventHandler(this.toolStripMenuRemove_Click);
             // 
             // toolStripMenuInsert
             // 
