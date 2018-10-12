@@ -131,6 +131,11 @@
             0,
             0,
             0});
+            this.speSpeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.speSpeed.Name = "speSpeed";
             this.speSpeed.Size = new System.Drawing.Size(60, 20);
             this.speSpeed.TabIndex = 6;
@@ -336,7 +341,7 @@
             this.toolStripSeparator3,
             this.toolStripMenuCalcOptimal});
             this.contextMenuGrid.Name = "contextMenuGrid";
-            this.contextMenuGrid.Size = new System.Drawing.Size(200, 198);
+            this.contextMenuGrid.Size = new System.Drawing.Size(200, 176);
             // 
             // toolStripMenuRemove
             // 

@@ -377,7 +377,7 @@ namespace EngineEmu
             {
                 var timings = new List<string>();
                 timings.Add("byte tablesLength = " + tableRPMPoints.Length);
-                timings.Add("// RPM:                " + string.Join(", ", tableRPMPoints.Select(f => Convert.ToInt32(1000000M / (f / 60M)))));
+                timings.Add("// RPM:                  " + string.Join(", ", tableRPMPoints.Select(f => Convert.ToInt32(1000000M / (f / 60M)))));
                 timings.Add("int tableRPMPoints[] = { " + string.Join(", ", tableRPMPoints) + " };");
                 timings.Add("int tableIgnDelays[] = { " + string.Join(", ", tableIgnDelays) + " };");
 
@@ -530,8 +530,8 @@ namespace EngineEmu
 
         private void btOverfollow_Click(object sender, EventArgs e)
         {
-            ulong dlt = ticks + ulong.MaxValue - 1000;
-            ticks = ulong.MaxValue - 1000;
+            ulong dlt = ticks + ulong.MaxValue - 10000;
+            ticks = ulong.MaxValue - 10000;
 
             lastTime += dlt;
             deltaTime = micros() - lastTime;
