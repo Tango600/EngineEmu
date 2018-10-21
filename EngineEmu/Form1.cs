@@ -214,7 +214,7 @@ namespace EngineEmu
 
                     if (tableIgnDelays[i] == 0)
                         tableIgnDelays[i] = 1;
-                    ignitionDelay = Convert.ToInt32((tableIgnDelays[i] / 360M) * deltaTime);
+                    ignitionDelay = Convert.ToInt32((deltaTime * (((ulong)tableIgnDelays[i] * 1000) / 360)) / 1000);
                     lastIgnitionDegree = Convert.ToInt32(360M / ((decimal)deltaTime / ignitionDelay));
 
                     startTime = lastTime + (ulong)ignitionDelay;
@@ -376,7 +376,7 @@ namespace EngineEmu
             if (saveFileTimings.ShowDialog() == DialogResult.OK)
             {
                 var timings = new List<string>();
-                timings.Add("byte tablesLength = " + tableRPMPoints.Length);
+                timings.Add("byte tablesLength = " + tableRPMPoints.Length + ";");
                 timings.Add("// RPM:                  " + string.Join(", ", tableRPMPoints.Select(f => Convert.ToInt32(1000000M / (f / 60M)))));
                 timings.Add("int tableRPMPoints[] = { " + string.Join(", ", tableRPMPoints) + " };");
                 timings.Add("int tableIgnDelays[] = { " + string.Join(", ", tableIgnDelays) + " };");
