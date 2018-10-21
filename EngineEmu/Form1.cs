@@ -184,7 +184,7 @@ namespace EngineEmu
         const int ignitionGap = 3000;
 
         byte sensor = 0;
-        int ignitionDelay = 0;
+        ulong ignitionDelay = 0;
         ulong lastTime = 0;
         ulong deltaTime = 100000;
         ulong stopTime = 0;
@@ -214,10 +214,10 @@ namespace EngineEmu
 
                     if (tableIgnDelays[i] == 0)
                         tableIgnDelays[i] = 1;
-                    ignitionDelay = Convert.ToInt32((deltaTime * (((ulong)tableIgnDelays[i] * 1000) / 360)) / 1000);
+                    ignitionDelay = (deltaTime * (((ulong)tableIgnDelays[i] * 1000) / 360)) / 1000;
                     lastIgnitionDegree = Convert.ToInt32(360M / ((decimal)deltaTime / ignitionDelay));
 
-                    startTime = lastTime + (ulong)ignitionDelay;
+                    startTime = lastTime + ignitionDelay;
                     lastStopTime = stopTime;
                     stopTime = startTime + ignitionGap;
                 }
