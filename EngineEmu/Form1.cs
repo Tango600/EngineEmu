@@ -198,13 +198,13 @@ namespace EngineEmu
                 if (deltaTime > 0 && deltaTime < 200000)
                 {
                     sensor = 0;
-                    int i = 0;
+                    byte i = 0;
                     while (i < tableRPMPoints.Length && (ulong)tableRPMPoints[i] > deltaTime)
                     {
                         i++;
                     }
                     if (i >= tableRPMPoints.Length)
-                        i = tableRPMPoints.Length - 1;
+                        i = Convert.ToByte(tableRPMPoints.Length - 1);
 
                     for (int j = 0; j < dgIgnitionMoments.Rows.Count; j++)
                     {
@@ -410,7 +410,27 @@ namespace EngineEmu
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-
+            for (int i = 0; i < dgIgnitionMoments.RowCount; i++)
+            {
+                if (dgIgnitionMoments[0, i].Value != null && dgIgnitionMoments[1, i].Value != null)
+                {
+                    string s = Convert.ToString(dgIgnitionMoments[0, i].Value) + ";" + Convert.ToString(dgIgnitionMoments[1, i].Value);
+                    if (s.Length > 3)
+                    {
+                        int deg = Convert.ToInt32(dgIgnitionMoments[1, i].Value);
+                        if (deg > 0)
+                        {
+                            dgIgnitionMoments[1, i].Value = 360 - deg;
+                        }
+                        else
+                        {
+                            dgIgnitionMoments[1, i].Value = -deg;
+                        }
+                        changed = true;
+                    }
+                }
+            }
+            chRoundNotation.Checked = true;
         }
 
         private void plusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -435,6 +455,7 @@ namespace EngineEmu
                     }
                 }
             }
+            chRoundNotation.Checked = false;
         }
 
         private void tmLed_Tick(object sender, EventArgs e)

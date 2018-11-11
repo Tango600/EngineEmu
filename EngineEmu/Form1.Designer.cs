@@ -58,8 +58,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuGetTimings = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuConvert = new System.Windows.Forms.ToolStripMenuItem();
-            this.plusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.plusToolStripItemPlusMunis = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripItemConvert360 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuCalcOptimal = new System.Windows.Forms.ToolStripMenuItem();
             this.btApply = new System.Windows.Forms.Button();
@@ -391,25 +391,25 @@
             // toolStripMenuConvert
             // 
             this.toolStripMenuConvert.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.plusToolStripMenuItem,
-            this.toolStripMenuItem2});
+            this.plusToolStripItemPlusMunis,
+            this.toolStripItemConvert360});
             this.toolStripMenuConvert.Name = "toolStripMenuConvert";
             this.toolStripMenuConvert.Size = new System.Drawing.Size(199, 22);
             this.toolStripMenuConvert.Text = "Convert round notation";
             // 
-            // plusToolStripMenuItem
+            // plusToolStripItemPlusMunis
             // 
-            this.plusToolStripMenuItem.Name = "plusToolStripMenuItem";
-            this.plusToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
-            this.plusToolStripMenuItem.Text = "+/-";
-            this.plusToolStripMenuItem.Click += new System.EventHandler(this.plusToolStripMenuItem_Click);
+            this.plusToolStripItemPlusMunis.Name = "plusToolStripItemPlusMunis";
+            this.plusToolStripItemPlusMunis.Size = new System.Drawing.Size(152, 22);
+            this.plusToolStripItemPlusMunis.Text = "+/-";
+            this.plusToolStripItemPlusMunis.Click += new System.EventHandler(this.plusToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem2
+            // toolStripItemConvert360
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(92, 22);
-            this.toolStripMenuItem2.Text = "360";
-            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            this.toolStripItemConvert360.Name = "toolStripItemConvert360";
+            this.toolStripItemConvert360.Size = new System.Drawing.Size(152, 22);
+            this.toolStripItemConvert360.Text = "360";
+            this.toolStripItemConvert360.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripSeparator3
             // 
@@ -629,8 +629,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileTimings;
         private System.Windows.Forms.CheckBox chRoundNotation;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuConvert;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem plusToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripItemConvert360;
+        private System.Windows.Forms.ToolStripMenuItem plusToolStripItemPlusMunis;
         private System.Windows.Forms.Label lbWarring;
         private System.Windows.Forms.Timer tmLed;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRPM;
