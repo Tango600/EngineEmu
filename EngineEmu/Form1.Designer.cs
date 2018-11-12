@@ -66,7 +66,7 @@
             this.openFileSettings = new System.Windows.Forms.OpenFileDialog();
             this.saveFileSettings = new System.Windows.Forms.SaveFileDialog();
             this.saveFileTimings = new System.Windows.Forms.SaveFileDialog();
-            this.chRoundNotation = new System.Windows.Forms.CheckBox();
+            this.chRoundNotation360 = new System.Windows.Forms.CheckBox();
             this.tmLed = new System.Windows.Forms.Timer(this.components);
             this.btPause = new System.Windows.Forms.Button();
             this.btTickStep = new System.Windows.Forms.Button();
@@ -400,14 +400,14 @@
             // plusToolStripItemPlusMunis
             // 
             this.plusToolStripItemPlusMunis.Name = "plusToolStripItemPlusMunis";
-            this.plusToolStripItemPlusMunis.Size = new System.Drawing.Size(152, 22);
+            this.plusToolStripItemPlusMunis.Size = new System.Drawing.Size(92, 22);
             this.plusToolStripItemPlusMunis.Text = "+/-";
             this.plusToolStripItemPlusMunis.Click += new System.EventHandler(this.plusToolStripMenuItem_Click);
             // 
             // toolStripItemConvert360
             // 
             this.toolStripItemConvert360.Name = "toolStripItemConvert360";
-            this.toolStripItemConvert360.Size = new System.Drawing.Size(152, 22);
+            this.toolStripItemConvert360.Size = new System.Drawing.Size(92, 22);
             this.toolStripItemConvert360.Text = "360";
             this.toolStripItemConvert360.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
@@ -451,15 +451,15 @@
             this.saveFileTimings.DefaultExt = "inc";
             this.saveFileTimings.Filter = "Scetch include|*.inc";
             // 
-            // chRoundNotation
+            // chRoundNotation360
             // 
-            this.chRoundNotation.AutoSize = true;
-            this.chRoundNotation.Location = new System.Drawing.Point(581, 223);
-            this.chRoundNotation.Name = "chRoundNotation";
-            this.chRoundNotation.Size = new System.Drawing.Size(126, 17);
-            this.chRoundNotation.TabIndex = 19;
-            this.chRoundNotation.Text = "Round notation - 360";
-            this.chRoundNotation.UseVisualStyleBackColor = true;
+            this.chRoundNotation360.AutoSize = true;
+            this.chRoundNotation360.Location = new System.Drawing.Point(581, 223);
+            this.chRoundNotation360.Name = "chRoundNotation360";
+            this.chRoundNotation360.Size = new System.Drawing.Size(126, 17);
+            this.chRoundNotation360.TabIndex = 19;
+            this.chRoundNotation360.Text = "Round notation - 360";
+            this.chRoundNotation360.UseVisualStyleBackColor = true;
             // 
             // tmLed
             // 
@@ -561,7 +561,7 @@
             this.Controls.Add(this.btRedraw);
             this.Controls.Add(this.btTickStep);
             this.Controls.Add(this.btPause);
-            this.Controls.Add(this.chRoundNotation);
+            this.Controls.Add(this.chRoundNotation360);
             this.Controls.Add(this.btApply);
             this.Controls.Add(this.dgIgnitionMoments);
             this.Controls.Add(this.chMonitor);
@@ -627,7 +627,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuGetTimings;
         private System.Windows.Forms.SaveFileDialog saveFileTimings;
-        private System.Windows.Forms.CheckBox chRoundNotation;
+        private System.Windows.Forms.CheckBox chRoundNotation360;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuConvert;
         private System.Windows.Forms.ToolStripMenuItem toolStripItemConvert360;
         private System.Windows.Forms.ToolStripMenuItem plusToolStripItemPlusMunis;

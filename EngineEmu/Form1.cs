@@ -23,6 +23,7 @@ namespace EngineEmu
         private bool monitorInit = false;
         private int ledTicks = 0;
         private bool paused = false;
+        private bool roundNotation360 = false;
 
         private int[] tableRPMPoints;
         private int[] tableIgnDelays;
@@ -68,25 +69,30 @@ namespace EngineEmu
         private void LoadParametrsFromFile(string FileName)
         {
             var lines = File.ReadAllLines(FileName);
-            dgIgnitionMoments.RowCount = lines.Length + 1;
-            for (int i = 0; i < lines.Length; i++)
-            {
-                if (lines[i].Length > 3)
-                {
-                    var element = lines[i].Split(';');
+            dgIgnitionMoments.RowCount = lines.Count(l => !l.Contains("#")) + 1;
+            roundNotation360 = lines.Any(l => l.Contains("#RN/360"));
+            chRoundNotation360.Checked = roundNotation360;
 
-                    dgIgnitionMoments[0, i].Value = element[0];
-                    dgIgnitionMoments[1, i].Value = element[1];
+            int ln = 0;
+            for (int i = 0; i < lines.Count(l => !l.Contains("#")); i++)
+            {
+                var element = lines[i].Split(';');
+                if (element.Length > 1)
+                {
+                    dgIgnitionMoments[0, ln].Value = element[0];
+                    dgIgnitionMoments[1, ln].Value = element[1];
+                    ln++;
                 }
             }
 
-            initParametrs(chRoundNotation.Checked);
+            initParametrs(chRoundNotation360.Checked);
             changed = false;
         }
 
         private void SaveParametrsToFile(string FileName)
         {
             var list = new List<string>();
+            list.Add(chRoundNotation360.Checked ? "#RN/360" : "#RN/plus-minus");
             for (int i = 0; i < dgIgnitionMoments.RowCount; i++)
             {
                 if (dgIgnitionMoments[0, i].Value != null && dgIgnitionMoments[1, i].Value != null)
@@ -105,7 +111,7 @@ namespace EngineEmu
         {
             speTicksByRotation.Value = ticksByRottation;
 
-            initParametrs(chRoundNotation.Checked);
+            initParametrs(chRoundNotation360.Checked);
 
             if (!monitorInit)
             {
@@ -307,13 +313,12 @@ namespace EngineEmu
             SetTimers((int)speSpeed.Value);
 
             string lastSetting = Properties.Settings.Default.LastSetting;
+            chRoundNotation360.Checked = Properties.Settings.Default.RoundNotation;
             if (!string.IsNullOrEmpty(lastSetting) && File.Exists(lastSetting))
             {
                 LoadParametrsFromFile(lastSetting);
                 lastTableName = lastSetting;
             }
-            chRoundNotation.Checked = Properties.Settings.Default.RoundNotation;
-
             tmLed.Start();
         }
 
@@ -333,7 +338,7 @@ namespace EngineEmu
 
         private void btApplay_Click(object sender, EventArgs e)
         {
-            initParametrs(chRoundNotation.Checked);
+            initParametrs(chRoundNotation360.Checked);
         }
 
         private void toolStripMenuSave_Click(object sender, EventArgs e)
@@ -367,8 +372,29 @@ namespace EngineEmu
                 dgIgnitionMoments.Rows.Insert(dgIgnitionMoments.CurrentRow.Index, "", "");
 
                 changed = true;
-                initParametrs(chRoundNotation.Checked);
+                initParametrs(chRoundNotation360.Checked);
             }
+        }
+
+        private int ConvertRoundNotation(int degree, bool ToRN360)
+        {
+            int res = 0;
+            if (ToRN360)
+            {
+                if (degree > 0)
+                {
+                    res = 360 - degree;
+                }
+                else
+                {
+                    res = -degree;
+                }
+            }
+            else
+            {
+                res = degree;
+            }
+            return res;
         }
 
         private void toolStripMenuGetTimings_Click(object sender, EventArgs e)
@@ -379,7 +405,7 @@ namespace EngineEmu
                 timings.Add("byte tablesLength = " + tableRPMPoints.Length + ";");
                 timings.Add("// RPM:                  " + string.Join(", ", tableRPMPoints.Select(f => Convert.ToInt32(1000000M / (f / 60M)))));
                 timings.Add("int tableRPMPoints[] = { " + string.Join(", ", tableRPMPoints) + " };");
-                timings.Add("int tableIgnDelays[] = { " + string.Join(", ", tableIgnDelays) + " };");
+                timings.Add("int tableIgnDelays[] = { " + string.Join(", ", tableIgnDelays.Select(f => ConvertRoundNotation(f, roundNotation360))) + " };");
 
                 File.WriteAllLines(saveFileTimings.FileName, timings.ToArray());
             }
@@ -398,14 +424,14 @@ namespace EngineEmu
                     SaveParametrsToFile(lastTableName);
                 }
             }
-            Properties.Settings.Default.RoundNotation = chRoundNotation.Checked;
+            Properties.Settings.Default.RoundNotation = chRoundNotation360.Checked;
             Properties.Settings.Default.Save();
         }
 
         private void dgIgnitionMoments_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             changed = true;
-            initParametrs(chRoundNotation.Checked);
+            initParametrs(chRoundNotation360.Checked);
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -430,7 +456,7 @@ namespace EngineEmu
                     }
                 }
             }
-            chRoundNotation.Checked = true;
+            chRoundNotation360.Checked = true;
         }
 
         private void plusToolStripMenuItem_Click(object sender, EventArgs e)
@@ -455,7 +481,7 @@ namespace EngineEmu
                     }
                 }
             }
-            chRoundNotation.Checked = false;
+            chRoundNotation360.Checked = false;
         }
 
         private void tmLed_Tick(object sender, EventArgs e)
@@ -567,7 +593,7 @@ namespace EngineEmu
             dgIgnitionMoments.Rows.Remove(row);
 
             changed = true;
-            initParametrs(chRoundNotation.Checked);
+            initParametrs(chRoundNotation360.Checked);
         }
     }
 }
