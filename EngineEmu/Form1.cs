@@ -220,7 +220,16 @@ namespace EngineEmu
 
                     if (tableIgnDelays[i] == 0)
                         tableIgnDelays[i] = 1;
-                    ignitionDelay = (deltaTime * (((ulong)tableIgnDelays[i] * 1000) / 360)) / 1000;
+
+                    if (chByShift.Checked)
+                    {
+                        ignitionDelay = (deltaTime * (((ulong)tableIgnDelays[i] * 1024) / 360)) / 1024;
+                    }
+                    else
+                    {
+                        ignitionDelay = (deltaTime * (((ulong)tableIgnDelays[i] * 1000) / 360)) / 1000;
+                    }
+
                     lastIgnitionDegree = Convert.ToInt32(360M / ((decimal)deltaTime / ignitionDelay));
 
                     startTime = lastTime + ignitionDelay;
@@ -314,6 +323,7 @@ namespace EngineEmu
 
             string lastSetting = Properties.Settings.Default.LastSetting;
             chRoundNotation360.Checked = Properties.Settings.Default.RoundNotation;
+            chByShift.Checked = Properties.Settings.Default.CalcByShift;
             if (!string.IsNullOrEmpty(lastSetting) && File.Exists(lastSetting))
             {
                 LoadParametrsFromFile(lastSetting);
@@ -424,6 +434,7 @@ namespace EngineEmu
                     SaveParametrsToFile(lastTableName);
                 }
             }
+            Properties.Settings.Default.CalcByShift = chByShift.Checked;
             Properties.Settings.Default.RoundNotation = chRoundNotation360.Checked;
             Properties.Settings.Default.Save();
         }
