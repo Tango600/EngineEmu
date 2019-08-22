@@ -187,7 +187,7 @@ namespace EngineEmu
             cycle++;
         }
 
-        const int ignitionGap = 3000;
+        byte flashDurationAngle = 10;
 
         byte sensor = 0;
         ulong ignitionDelay = 0;
@@ -221,7 +221,7 @@ namespace EngineEmu
                     if (tableIgnDelays[i] == 0)
                         tableIgnDelays[i] = 1;
 
-                    if (chByShift.Checked)
+                    if (chOptimalCalc1024.Checked)
                     {
                         ignitionDelay = (deltaTime * (((ulong)tableIgnDelays[i] * 1024) / 360)) / 1024;
                     }
@@ -234,7 +234,7 @@ namespace EngineEmu
 
                     startTime = lastTime + ignitionDelay;
                     lastStopTime = stopTime;
-                    stopTime = startTime + ignitionGap;
+                    stopTime = startTime + (ulong)speFlashDuration.Value;
                 }
             }
 
@@ -245,8 +245,8 @@ namespace EngineEmu
                 monAngle.Text = CalcDegreeMonitor(lastIgnitionDegree).ToString() + " deg.";
                 if (chMonitor.Checked)
                 {
-                    DrawingObjects.DrawIgnitionMoment(graphics, lastIgnitionDegree, deltaTime, ignitionGap, FigureType.Figure);
-                    int igntSector = DrawingObjects.DrawIgnitFlashSector(graphics, lastIgnitionDegree, deltaTime, (int)speFlashDuration.Value, FigureType.Figure);
+                    DrawingObjects.DrawIgnitionMoment(graphics, lastIgnitionDegree, deltaTime, (int)speFlashDuration.Value, FigureType.Figure);
+                    int igntSector = DrawingObjects.DrawIgnitFlashSector(graphics, lastIgnitionDegree, deltaTime, flashDurationAngle, FigureType.Figure);
                     if (lastIgnitionDegree + igntSector < 360 && lastIgnitionDegree + igntSector > 180)
                     {
                         lbWarring.Visible = true;
@@ -323,7 +323,7 @@ namespace EngineEmu
 
             string lastSetting = Properties.Settings.Default.LastSetting;
             chRoundNotation360.Checked = Properties.Settings.Default.RoundNotation;
-            chByShift.Checked = Properties.Settings.Default.CalcByShift;
+            chOptimalCalc1024.Checked = Properties.Settings.Default.CalcByShift;
             if (!string.IsNullOrEmpty(lastSetting) && File.Exists(lastSetting))
             {
                 LoadParametrsFromFile(lastSetting);
@@ -412,7 +412,8 @@ namespace EngineEmu
             if (saveFileTimings.ShowDialog() == DialogResult.OK)
             {
                 var timings = new List<string>();
-                timings.Add("byte tablesLength = " + tableRPMPoints.Length + ";");
+                timings.Add("const int FlashDuration = " + Convert.ToInt32(speFlashDuration.Value) + ";");
+                timings.Add("const byte tablesLength = " + tableRPMPoints.Length + ";");
                 timings.Add("// RPM:                  " + string.Join(", ", tableRPMPoints.Select(f => Convert.ToInt32(1000000M / (f / 60M)))));
                 timings.Add("int tableRPMPoints[] = { " + string.Join(", ", tableRPMPoints) + " };");
                 timings.Add("int tableIgnDelays[] = { " + string.Join(", ", tableIgnDelays.Select(f => ConvertRoundNotation(f, roundNotation360))) + " };");
@@ -434,7 +435,7 @@ namespace EngineEmu
                     SaveParametrsToFile(lastTableName);
                 }
             }
-            Properties.Settings.Default.CalcByShift = chByShift.Checked;
+            Properties.Settings.Default.CalcByShift = chOptimalCalc1024.Checked;
             Properties.Settings.Default.RoundNotation = chRoundNotation360.Checked;
             Properties.Settings.Default.Save();
         }
@@ -593,8 +594,8 @@ namespace EngineEmu
 
             lastTime += dlt;
             deltaTime = micros() - lastTime;
-            startTime = lastTime + (ulong)ignitionDelay;
-            stopTime = startTime + ignitionGap;
+            startTime = lastTime + ignitionDelay;
+            stopTime = startTime + (ulong)speFlashDuration.Value;
             lastStopTime = stopTime;
         }
 

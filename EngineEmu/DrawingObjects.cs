@@ -17,10 +17,10 @@ namespace Drawing
         public static int figureX = 20;
         public static int figureY = 20;
         public static Color BackgroundColor = Color.Gray;
+        public const int circleRadius = 75;
 
         private static Color baseColor = Color.Black;
         private const int penNum = 3;
-        public const int circleRadius = 75;
 
         private static int ConvertDegree(int degree)
         {
@@ -42,20 +42,24 @@ namespace Drawing
             g.DrawEllipse(blackPen, figureX, figureY, circleRadius * 2, circleRadius * 2);
         }
 
-        public static int DrawIgnitFlashSector(Graphics g, int startAngle, ulong deltaTime, int flasDuration, FigureType figureType)
+        public static int DrawIgnitFlashSector(Graphics g, int startAngle, ulong deltaTime, byte FlashDurationAngle, FigureType figureType)
         {
             int sweepAngle = 0;
             int r = circleRadius * 2;
 
             var pen = new Pen(figureType == FigureType.Figure ? Color.Orange : BackgroundColor, penNum);
-            if (figureType == FigureType.Figure)
+            switch (figureType)
             {
-                sweepAngle = Convert.ToInt32(360M / ((decimal)deltaTime / flasDuration));
-                g.DrawArc(pen, figureX + 25, figureY + 25, r - 50, r - 50, ConvertDegree(Math.Abs(startAngle)), sweepAngle);
-            }
-            else
-            {
-                g.DrawArc(pen, figureX + 25, figureY + 25, r - 50, r - 50, ConvertDegree(0), 360);
+                case FigureType.Figure:
+                    sweepAngle = Convert.ToInt32(FlashDurationAngle);
+                    g.DrawArc(pen, figureX + 25, figureY + 25, r - 50, r - 50, ConvertDegree(Math.Abs(startAngle)), sweepAngle);
+
+                    break;
+
+                case FigureType.Mask:
+                    g.DrawArc(pen, figureX + 25, figureY + 25, r - 50, r - 50, ConvertDegree(0), 360);
+
+                    break;
             }
             return sweepAngle;
         }

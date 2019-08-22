@@ -74,7 +74,7 @@
             this.speFlashDuration = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.btOverfollow = new System.Windows.Forms.Button();
-            this.chByShift = new System.Windows.Forms.CheckBox();
+            this.chOptimalCalc1024 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.speSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.speTicksByRotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.speRPM)).BeginInit();
@@ -113,7 +113,7 @@
             // lbTicks
             // 
             this.lbTicks.AutoSize = true;
-            this.lbTicks.Location = new System.Drawing.Point(111, 30);
+            this.lbTicks.Location = new System.Drawing.Point(76, 30);
             this.lbTicks.Name = "lbTicks";
             this.lbTicks.Size = new System.Drawing.Size(25, 13);
             this.lbTicks.TabIndex = 3;
@@ -158,7 +158,7 @@
             0,
             0,
             0});
-            this.speTicksByRotation.Location = new System.Drawing.Point(10, 80);
+            this.speTicksByRotation.Location = new System.Drawing.Point(146, 28);
             this.speTicksByRotation.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -186,7 +186,7 @@
             0,
             0,
             0});
-            this.speRPM.Location = new System.Drawing.Point(108, 80);
+            this.speRPM.Location = new System.Drawing.Point(125, 111);
             this.speRPM.Maximum = new decimal(new int[] {
             20000,
             0,
@@ -210,7 +210,7 @@
             // 
             this.pnLed.BackColor = System.Drawing.Color.Black;
             this.pnLed.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.pnLed.Location = new System.Drawing.Point(206, 80);
+            this.pnLed.Location = new System.Drawing.Point(209, 63);
             this.pnLed.Name = "pnLed";
             this.pnLed.Size = new System.Drawing.Size(25, 23);
             this.pnLed.TabIndex = 11;
@@ -227,7 +227,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 66);
+            this.label2.Location = new System.Drawing.Point(143, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 13);
             this.label2.TabIndex = 13;
@@ -236,7 +236,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(105, 64);
+            this.label3.Location = new System.Drawing.Point(122, 95);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 14;
@@ -401,14 +401,14 @@
             // plusToolStripItemPlusMunis
             // 
             this.plusToolStripItemPlusMunis.Name = "plusToolStripItemPlusMunis";
-            this.plusToolStripItemPlusMunis.Size = new System.Drawing.Size(152, 22);
+            this.plusToolStripItemPlusMunis.Size = new System.Drawing.Size(92, 22);
             this.plusToolStripItemPlusMunis.Text = "+/-";
             this.plusToolStripItemPlusMunis.Click += new System.EventHandler(this.plusToolStripMenuItem_Click);
             // 
             // toolStripItemConvert360
             // 
             this.toolStripItemConvert360.Name = "toolStripItemConvert360";
-            this.toolStripItemConvert360.Size = new System.Drawing.Size(152, 22);
+            this.toolStripItemConvert360.Size = new System.Drawing.Size(92, 22);
             this.toolStripItemConvert360.Text = "360";
             this.toolStripItemConvert360.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
@@ -512,14 +512,14 @@
             0,
             0,
             0});
-            this.speFlashDuration.Location = new System.Drawing.Point(10, 125);
+            this.speFlashDuration.Location = new System.Drawing.Point(7, 111);
             this.speFlashDuration.Maximum = new decimal(new int[] {
             10000,
             0,
             0,
             0});
             this.speFlashDuration.Minimum = new decimal(new int[] {
-            500,
+            10,
             0,
             0,
             0});
@@ -527,7 +527,7 @@
             this.speFlashDuration.Size = new System.Drawing.Size(60, 20);
             this.speFlashDuration.TabIndex = 23;
             this.speFlashDuration.Value = new decimal(new int[] {
-            3000,
+            240,
             0,
             0,
             0});
@@ -535,7 +535,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 109);
+            this.label4.Location = new System.Drawing.Point(4, 95);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(104, 13);
             this.label4.TabIndex = 24;
@@ -551,22 +551,22 @@
             this.btOverfollow.UseVisualStyleBackColor = true;
             this.btOverfollow.Click += new System.EventHandler(this.btOverfollow_Click);
             // 
-            // chByShift
+            // chOptimalCalc1024
             // 
-            this.chByShift.AutoSize = true;
-            this.chByShift.Location = new System.Drawing.Point(128, 128);
-            this.chByShift.Name = "chByShift";
-            this.chByShift.Size = new System.Drawing.Size(83, 17);
-            this.chByShift.TabIndex = 26;
-            this.chByShift.Text = "Calc by shift";
-            this.chByShift.UseVisualStyleBackColor = true;
+            this.chOptimalCalc1024.AutoSize = true;
+            this.chOptimalCalc1024.Location = new System.Drawing.Point(10, 63);
+            this.chOptimalCalc1024.Name = "chOptimalCalc1024";
+            this.chOptimalCalc1024.Size = new System.Drawing.Size(88, 17);
+            this.chOptimalCalc1024.TabIndex = 26;
+            this.chOptimalCalc1024.Text = "Calc by 1024";
+            this.chOptimalCalc1024.UseVisualStyleBackColor = true;
             // 
             // Engine
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 246);
-            this.Controls.Add(this.chByShift);
+            this.Controls.Add(this.chOptimalCalc1024);
             this.Controls.Add(this.btOverfollow);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.speFlashDuration);
@@ -655,7 +655,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuCalcOptimal;
         private System.Windows.Forms.Button btOverfollow;
-        private System.Windows.Forms.CheckBox chByShift;
+        private System.Windows.Forms.CheckBox chOptimalCalc1024;
     }
 }
 
