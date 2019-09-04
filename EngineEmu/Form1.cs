@@ -39,7 +39,7 @@ namespace EngineEmu
             var ignDelays = new List<int>();
             for (int i = 0; i < dgIgnitionMoments.RowCount; i++)
             {
-                if (dgIgnitionMoments[0, i]?.Value != null && dgIgnitionMoments[0, i].Value.ToString() != "" && dgIgnitionMoments[1, i].Value.ToString() != "")
+                if (dgIgnitionMoments[0, i]?.Value != null && dgIgnitionMoments[0, i].Value.ToString() != "" && dgIgnitionMoments[1, i]?.Value != null && dgIgnitionMoments[1, i].Value.ToString() != "")
                 {
                     decimal rpm = Convert.ToDecimal(dgIgnitionMoments[0, i].Value);
                     decimal rt = (1000000M / (rpm / 60M));
@@ -74,14 +74,17 @@ namespace EngineEmu
             chRoundNotation360.Checked = roundNotation360;
 
             int ln = 0;
-            for (int i = 0; i < lines.Count(l => !l.Contains("#")); i++)
+            for (int i = 0; i < lines.Length; i++)
             {
-                var element = lines[i].Split(';');
-                if (element.Length > 1)
+                if (!lines[i].Contains("#"))
                 {
-                    dgIgnitionMoments[0, ln].Value = element[0];
-                    dgIgnitionMoments[1, ln].Value = element[1];
-                    ln++;
+                    var element = lines[i].Split(';');
+                    if (element.Length > 1)
+                    {
+                        dgIgnitionMoments[0, ln].Value = element[0];
+                        dgIgnitionMoments[1, ln].Value = element[1];
+                        ln++;
+                    }
                 }
             }
 
